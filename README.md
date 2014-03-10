@@ -18,4 +18,4 @@ printWidget.startup();
 
 Screen from Sample page:
 
-![Screenshot](https://raw.github.com/DavidSpriggs/print-widget-js/master/screenshot.PNG)
+![Screenshot](https://raw.github.com/DavidSpriggs/print-widget-js/master/ScreenShot.png)
