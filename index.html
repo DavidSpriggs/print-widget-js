@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+    <title>Simple Map</title>
+    <link rel="stylesheet" href="http://js.arcgis.com/3.8/js/esri/css/esri.css">
+    <style>
+      html, body, #map {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: #FFF;
+        overflow: hidden;
+        font-family: "Trebuchet MS";
+      }
+      .printNode {
+        width: 300px;
+        min-height: 165px;
+        background-color: #fff;
+        position:absolute;
+        top:10px;
+        right:10px;
+        z-index:40;
+      }
+    </style>
+    <script type="text/javascript">
+            var dojoConfig = {
+                async: true,
+                packages: [{
+                    name: "gis",
+                    location: location.pathname.replace(/[^\/]+$/, '') + "js/gis"
+                },{
+                    name: "dbootstrap",
+                    location: location.pathname.replace(/[^\/]+$/, '') + "js/dbootstrap"
+                },{
+                    name: "xstyle",
+                    location: location.pathname.replace(/[^\/]+$/, '') + "js/dbootstrap"
+                }]
+            };
+        </script>
+  </head>
+
+  <body class="dbootstrap">
+  <script src="http://js.arcgis.com/3.8/" data-dojo-props="async:true"></script>
+    <script>
+      require(["dbootstrap", "esri/map", "gis/dijit/Print", "dojo/domReady!"], function(dbootstrap, Map, Print) {
+
+        var map = new Map("map", {
+          basemap: "topo",
+          center: [-122.45,37.75],
+          zoom: 13,
+          sliderStyle: "small"
+        });
+
+        var printWidget = new Print({
+                map: map,
+                printTaskURL: "https://utility.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
+                authorText: "Dave",
+                copyrightText: "2014",
+                defaultTitle: "My Map",
+                defaultFormat: "PDF",
+                defaultLayout: null
+            }, 'printDijit');
+        printWidget.startup();
+
+      });
+    </script>
+    <div id="map">
+      <div class="printNode">
+          <div id="printDijit">
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
